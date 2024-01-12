@@ -68,6 +68,7 @@ public class PaymentController {
 		finally {
 			return order.toString();
 		}
+		}
 		@PostMapping("/verify")
 	@ResponseBody
 	public boolean verifyPayment(@RequestParam  String orderId, @RequestParam String paymentId, @RequestParam String signature) {
@@ -86,6 +87,4 @@ public class PaymentController {
 	        return false;
 	    }
 	}
-}
-	}	
 }
