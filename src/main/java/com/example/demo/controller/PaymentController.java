@@ -42,7 +42,7 @@ public class PaymentController {
 	@SuppressWarnings("finally")
 	@PostMapping("/createOrder")
 	@ResponseBody
-	public String createOrder(HttpSession session) {
+	public String createOrder() {
 
 		int  amount  = 5000;
 		Order order=null;
@@ -56,11 +56,6 @@ public class PaymentController {
 
 			order = razorpay.orders.create(orderRequest);
 
-			String mail =  (String) session.getAttribute("email");
-
-			Users u = service.getUser(mail);
-			u.setPremium(true);
-			service.updateUser(u);
 
 		} catch (RazorpayException e) {
 			e.printStackTrace();
@@ -69,7 +64,7 @@ public class PaymentController {
 			return order.toString();
 		}
 		}
-		@PostMapping("/verify")
+	@PostMapping("/verify")
 	@ResponseBody
 	public boolean verifyPayment(@RequestParam  String orderId, @RequestParam String paymentId, @RequestParam String signature) {
 	    try {
